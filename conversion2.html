@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+</style>
+</head>
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-small">
+    <a href="index.html">Back to Home Page</a>
+  </div>
+  <div class="w3-display-middle">
+    <h1 class="w3-xxxlarge w3-animate-top w3-center">Conversion from Fahrenheit to Celsius</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">
+<label for="n1">Value in Fahrenheit</label> 
+<input id="n1" name="n1" type="number">
+<button onclick="convertFtoC()" class= "w3-medium"> Convert </button>
+</p>
+ 
+<p class="w3-large w3-center">
+<label for="celsius" id="celsiuslabel">Value in Celsius</label>  
+<input id="celsius" name="celsius" type="number" readonly></input>
+</p>
+<script>
+function convertFtoC()
+{
+  var x;
+
+  // Retrieve the user input 
+  x = document.getElementById("n1").value*1;  // *1 Converts the result to number
+
+  // Convert Fahrenheit to Celsius
+  let z  = (x-32) * 5/9;
+
+// console.log(x)
+// console.log(z)
+
+  // Display the result
+    document.getElementById("celsius").value=z;
+}
+   
+</script>
+</body>
+</html>
