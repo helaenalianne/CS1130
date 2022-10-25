@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Income Tax Calculator - Assignment #2</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+}
+</style>
+</head>
+<body>
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-small">
+    <a href="index.html">Back to Home Page</a>
+  </div>
+  <div class="w3-display-middle">
+    <h1 class="w3-xxxlarge w3-animate-top w3-center">Income Tax Calculator</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    <p class="w3-large w3-center">
+<label for="n1">Input Taxable Income</label> 
+<input id="n1" name="n1" type="number">
+<button onclick="calculateincometax()" class= "w3-medium"> Confirm </button>
+</p>
+ 
+<p class="w3-large w3-center">
+<label for="incometax" id="incometaxlabel">Income Tax</label>  
+<input id="incometax" name="incometax" type="number" readonly></input>
+</p>
+<script>
+function calculateincometax()
+{
+  var x,z;
+
+  // Retrieve the user input 
+  x = document.getElementById("n1").value*1;  // *1 Converts the result to number
+// console.log(x)
+
+  // Get Income Tax
+  if (x <= 250000) {
+      z = 0;
+   } else if (x>250000 && x<=400000) {
+      z = (x-250000) * 0.2;
+   } else if (x>400000 && x<=800000) {
+      z = (x-400000) * 0.25 + 30000;
+   } else if (x>800000 && x<=2000000) {
+      z = (x-800000) * 0.3 + 130000;
+   } else if (x>2000000 && x<=8000000) {
+      z = (x-2000000) * 0.32 + 490000;
+    } else  {
+      z = (x-8000000) * 0.35 + 2410000;
+   }      
+
+// console.log(z)
+
+  // Display the result
+    document.getElementById("incometax").value = z;
+}
+   
+</script>
+</body>
+</html>
