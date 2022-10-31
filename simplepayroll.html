@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Simple Payroll - Assignment #4</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<style>
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+  background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+  min-height: 100%;
+  background-position: center;
+  background-size: cover;
+  }
+
+</style>
+</head>
+<body onload="inittable()">
+
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-white">
+  <div class="w3-display-topleft w3-padding-large w3-small">
+    <a href="index.html">Back to Home Page</a>
+  </div>
+  <div class= w3-display-topcenter><br></br>
+    <h1 class="w3-xxxlarge w3-animate-top w3-center">Simple Payroll</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:40%">
+    
+<p class="w3-medium w3-center">
+    <label for="employeename">Employee Name</label>    
+    <select name="employeename" id="employeename">
+        <option value="Marie">Marie</option>
+        <option value="John">John</option>
+        <option value="Uno">Uno</option>
+        <option value="Lucky">Lucky</option>
+        <option value="Lianne">Lianne</option>
+    </select>
+      <label for="days">Days Worked</label>
+      <input id="days" name="days" type="number"></input>
+      <button onclick="computeGrossPayandNetPay()">Confirm</button>
+
+</p>
+
+<p class="w3-medium w3-center">
+    <label for="rate">Daily Rate</label>
+    <input id="rate" name="rate" type="number" oninput="computegrosspay()"></input>
+    <label for="deduction">Deduction Amount</label>
+    <input id="deduction" name="deduction" type="number" oninput="computenetpay"></input>
+</p>
+<p class="w3-medium w3-center">
+    <label for="delitem">Delete Item</label>
+    <input id="delitem" name="delitem" type="number" ></input>
+    <button onclick="deleteitem()">Delete</button>
+    <button onclick="clearTable()">Clear</button> 
+</p>
+<p id= "contents" class="w3-center">Number of Contents:</p>
+<div id="table"></div>
+
+</div>
+
+<script>
+// Initialize table     
+    function inittable(){
+        table=[];
+        document.getElementById("contents").value=table.length;
+        document.getElementById("table").innerHTML="";
+
+            
+    }
+
+    // Clear Table
+    function clearTable(){
+        var toclear;
+
+        toclear=confirm("Delete all contents of table?");
+
+        if (toclear) {
+             inittable();
+        }
+            
+    }
+
+    // Add item to table
+    function addRow(){
+         
+         var tableitem = {
+             "name": "1",
+             "days": 0,
+             "rate": 1,
+             "gp" : function getGrossPay(){
+                 return Math.round(this.days*this.rate*100)/100;  
+               }
+             "deduction": 1
+             "np" : function getNetPay(){
+                 return Math.round(this.gp-this.deduction*100)/100
+                }
+            };
+
+          tableitem.name=document.getElementById("employeename").value;
+          tableitem.days=document.getElementById("days").value;
+          tableitem.rate=document.getElementById("rate").value;
+          tableitem.deduction=document.getElementById("deduction").value
+
+          console.log(tableitem.name);
+          console.log(tableitem.days);
+          console.log(tableitem.rate);
+          console.log(tableitem.deduction)
+
+
+           table.push(tableitem);
+
+          console.log(table.length);
+          document.getElementById("contents").value=table.length;
+
+          showTable();
+
+    }
+    
+    // Delete item from chart
+    function deleteitem(){
+        var todelete;
+        var itemno;
+
+        itemno=document.getElementById("delitem").value;
+
+        todelete=confirm("Delete item no. "+itemno+"?");
+
+        if (todelete) {
+
+            table.splice(itemno-1,1);
+            document.getElementById("items").value=cart.length;
+             showtable();   
+        }
+
+    }
+
+    // Show the contents of the table
+    function showtable(){
+
+        var i,l,tabletext,totalamount,ln;
+        var theader,tbody,tb,tfooter;
+
+    
+        // Generate table header;
+        theader ="<thead>";
+        theader+="<tr>";
+        theader+="<th>No.</th>";
+        theader+='<th>Employee Name</th>';
+        theader+="<th>Days Worked</th>";
+        theader+='<th>Daily Rate</th>';
+        theader+="<th>Gross Pay</th>";
+        theader+="<th>Deduction Amount</th>";
+        theader+="<th>Net Pay</th>";
+        theader+="</tr>";
+        theader+="</thead>";
+        
+        // Generate Table Body
+        l = table.length;
+      
+        
+        for (i=0,totalnumber=0,tabletext="",tbody='';i<l;i++){
+            ln=i+1;    
+            tbody += "<tr>"
+                +'<td>'+ln+' </td>'
+                +'<td>'+table[i].name+' </td>'
+                +'<td style="text-align:right">'+table[i].days+'</td>'
+                +'<td style="text-align:right">'+table[i].rate+'</td>'
+                +'<td style="text-align:right">'+table[i].getGrossPay()+'</td>'
+                +'<td style="text-align:right">'+table[i].deduction+'</td>'
+                +'<td style="text-align:right">'+table[i].getNetPay()+'</td>'                
+                +"</tr>";
+                       
+            totalamount+=table[i].itemamount();
+          
+
+        }
+
+        //tbody += "</tbody>";
+
+    
+  
+// Global variable
+var cart = []; 
+
+</script>
+</body>
+</html>
